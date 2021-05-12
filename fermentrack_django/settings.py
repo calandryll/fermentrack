@@ -216,6 +216,10 @@ CONSTANCE_ADDITIONAL_FIELDS = {
         'widget': 'django.forms.Select',
         'choices': [(x,x) for x in pytz.common_timezones]
     }],
+    'theme_select': ['django.forms.fields.ChoiceField', {  
+        'widget': 'django.forms.Select',
+        'choices': ((None, "-----"), ('none', 'None'), ('nord', 'Nord Theme'))
+    }],
 }
 
 # CONSTANCE_SUPERUSER_ONLY = False
@@ -239,6 +243,7 @@ CONSTANCE_CONFIG = {
     'FIRMWARE_LIST_LAST_REFRESHED': (pytz.timezone(TIME_ZONE).localize(datetime.datetime.now())+datetime.timedelta(hours=-25), 'When was the firmware list last refreshed from fermentrack.com?',
                                      datetime.datetime),
     'PREFERRED_TIMEZONE': ("UTC", 'What timezone would you prefer to use in Fermentrack?', 'timezone_select'),
+    'CUSTOM_THEME': ('none', 'Select the display theme.', 'theme_select'),
 
     'GRAPH_BEER_TEMP_COLOR': ("#E3B505", 'What color do you want the beer temperature line on the graph?', str),
     'GRAPH_BEER_SET_COLOR': ("#203340", 'What color do you want the beer setting line on the graph?', str),
@@ -255,7 +260,7 @@ CONSTANCE_CONFIG = {
 CONSTANCE_CONFIG_FIELDSETS = {
     'General Options': ('BREWERY_NAME', 'DATE_TIME_FORMAT_DISPLAY', 'REQUIRE_LOGIN_FOR_DASHBOARD', 'TEMPERATURE_FORMAT',
                         'TEMP_CONTROL_SUPPORT_ENABLED', 'GRAVITY_SUPPORT_ENABLED', 'PREFERRED_TIMEZONE',
-                        'GRAVITY_DISPLAY_FORMAT'),
+                        'GRAVITY_DISPLAY_FORMAT', 'CUSTOM_THEME'),
 
     'Graph Colors': ('GRAPH_BEER_TEMP_COLOR', 'GRAPH_BEER_SET_COLOR', 'GRAPH_FRIDGE_TEMP_COLOR',
                      'GRAPH_FRIDGE_SET_COLOR', 'GRAPH_ROOM_TEMP_COLOR', 'GRAPH_GRAVITY_COLOR',
